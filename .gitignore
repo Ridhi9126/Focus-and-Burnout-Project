@@ -1,2 +1,11 @@
 node_modules/
 .env
+
+#python virtual environments
+.venv/
+venv/
+ml/venv/
+
+#python cache files
+__pycache__/
+*.pyc
