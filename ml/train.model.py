@@ -1,10 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-df=pd.read_json("ml/dataset.json")
+from sklearn.linear_model import LogisticRegression
 
-print(df.head())
-print(df.columns)
-print(df.shape)
+df=pd.read_json("ml/dataset.json")
 
 # -------------------------------
 # Dataset Explanation
@@ -19,16 +17,15 @@ print(df.shape)
 # burnout_label -> burnout category (Low, Medium, High)
 
 df["burnout_label"]=df["burnout_label"].map({
-    "Low":0,
+    "Low":0,                        # machine learining model requires numerial labels
     "Medium":1,
     "High":2
 })
 
-x = df[['study_hours', 'sleep_hours', 'breaks', 'stress_level']]
-y = df['burnout_label']
+x = df[['study_hours', 'sleep_hours', 'breaks', 'stress_level']]     # features
+y = df['burnout_label']                                              # labels
 
-print(df["burnout_label"].head())
-
-x_train, x_test, y_train, y_test= train_test_split(x,y,test_size=0.2,random_state=42)
-print("training data size",x_train.shape)
-print("testing data size",x_test.shape)
+x_train, x_test, y_train, y_test= train_test_split(x,y,test_size=0.2,random_state=42)    #train-test-split
+model = LogisticRegression(max_iter=100)         # max_iter uses the maximum number of iteraions he model can use to converge during training
+model.fit(x_train,y_train)
+print("Model Trained Successfully")
