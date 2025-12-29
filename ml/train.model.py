@@ -1,7 +1,10 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score 
+from sklearn.metrics import accuracy_score, confusion_matrix
+
 
 df=pd.read_json("ml/dataset.json")
 
@@ -37,3 +40,12 @@ print("accuracy:",accuracy)
 
 for actual, predicted in zip(y_test,y_pred):        # zip pairs each actual label with its corresponding predicted label so they can be compared together.
     print(f"actual:{actual}, predicted:{predicted}") 
+
+cm= confusion_matrix(y_test,y_pred)
+print(cm)
+
+sns.heatmap(cm,annot=True, fmt='d',xticklabels=['Low','Medium','High'],yticklabels=['Low','Medium','High'])
+plt.xlabel='Pridiction'
+plt.ylabel='actual'
+
+plt.show()
