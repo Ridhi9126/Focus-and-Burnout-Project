@@ -68,5 +68,89 @@
         "breaks": 4,
         "stress_level": 1,
         "burnout_label": "Low"
+    },
+    {
+        "study_hours": 4,
+        "sleep_hours": 8,
+        "breaks": 4,
+        "stress_level": 2,
+        "burnout_label": "Low"
+    },
+    {
+        "study_hours": 5,
+        "sleep_hours": 7,
+        "breaks": 3,
+        "stress_level": 3,
+        "burnout_label": "Low"
+    },
+    {
+        "study_hours": 3,
+        "sleep_hours": 9,
+        "breaks": 5,
+        "stress_level": 1,
+        "burnout_label": "Low"
+    },
+    {
+        "study_hours": 6,
+        "sleep_hours": 8,
+        "breaks": 3,
+        "stress_level": 2,
+        "burnout_label": "Low"
+    },
+    {
+        "study_hours": 6,
+        "sleep_hours": 6,
+        "breaks": 2,
+        "stress_level": 4,
+        "burnout_label": "Medium"
+    },
+    {
+        "study_hours": 7,
+        "sleep_hours": 6,
+        "breaks": 2,
+        "stress_level": 5,
+        "burnout_label": "Medium"
+    },
+    {
+        "study_hours": 5,
+        "sleep_hours": 5,
+        "breaks": 3,
+        "stress_level": 4,
+        "burnout_label": "Medium"
+    },
+    {
+        "study_hours": 6,
+        "sleep_hours": 5,
+        "breaks": 1,
+        "stress_level": 5,
+        "burnout_label": "Medium"
+    },
+    {
+        "study_hours": 9,
+        "sleep_hours": 4,
+        "breaks": 1,
+        "stress_level": 8,
+        "burnout_label": "High"
+    },
+    {
+        "study_hours": 8,
+        "sleep_hours": 4,
+        "breaks": 1,
+        "stress_level": 7,
+        "burnout_label": "High"
+    },
+    {
+        "study_hours": 7,
+        "sleep_hours": 3,
+        "breaks": 0,
+        "stress_level": 9,
+        "burnout_label": "High"
+    },
+    {
+        "study_hours": 10,
+        "sleep_hours": 5,
+        "breaks": 1,
+        "stress_level": 8,
+        "burnout_label": "High"
     }
 ]
