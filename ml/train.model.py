@@ -1,51 +1,42 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
 
+df = pd.read_json("ml/dataset.json")
 
-df=pd.read_json("ml/dataset.json")
-
-# -------------------------------
-# Dataset Explanation
-# -------------------------------
-# Features (X):
-# study_hours   -> number of hours spent studying
-# sleep_hours   -> number of hours of sleep
-# breaks        -> number of breaks taken
-# stress_level  -> self-reported stress level
-
-# Label (y):
-# burnout_label -> burnout category (Low, Medium, High)
-
-df["burnout_label"]=df["burnout_label"].map({
-    "Low":0,                        # machine learining model requires numerial labels
-    "Medium":1,
-    "High":2
+df["burnout_label"] = df["burnout_label"].map({
+    "Low": 0,
+    "Medium": 1,
+    "High": 2
 })
 
-x = df[['study_hours', 'sleep_hours', 'breaks', 'stress_level']]     # features
-y = df['burnout_label']                                              # labels
+X = df[['study_hours', 'sleep_hours', 'breaks', 'stress_level']]
+y = df['burnout_label']
 
-x_train, x_test, y_train, y_test= train_test_split(x,y,test_size=0.2,random_state=42)    #train-test-split
-model = LogisticRegression(max_iter=100)         # max_iter uses the maximum number of iteraions he model can use to converge during training
-model.fit(x_train,y_train)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
-y_pred=model.predict(x_test)
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression(max_iter=1000))
+])
 
-accuracy=accuracy_score(y_test,y_pred)
-print("accuracy:",accuracy)
+pipeline.fit(X_train, y_train)
 
-for actual, predicted in zip(y_test,y_pred):        # zip pairs each actual label with its corresponding predicted label so they can be compared together.
-    print(f"actual:{actual}, predicted:{predicted}") 
+y_pred = pipeline.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
 
-cm= confusion_matrix(y_test,y_pred)
-print(cm)
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
 
-sns.heatmap(cm,annot=True, fmt='d',xticklabels=['Low','Medium','High'],yticklabels=['Low','Medium','High'])
-plt.xlabel='Pridiction'
-plt.ylabel='actual'
+coef = pipeline.named_steps["model"].coef_[2]
+coef_df = pd.DataFrame({
+    "Feature": X.columns,
+    "Coefficient": coef
+}).sort_values(by="Coefficient", ascending=False)
 
-plt.show()
+print(coef_df)
