@@ -4,6 +4,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
+import matplotlib.pyplot as plt
 
 df = pd.read_json("ml/dataset.json")
 
@@ -40,3 +41,17 @@ coef_df = pd.DataFrame({
 }).sort_values(by="Coefficient", ascending=False)
 
 print(coef_df)
+
+plt.figure()
+plt.scatter(df['study_hours'],df['burnout_label'])
+plt.xlabel("study hours")
+plt.ylabel("burnout label")
+plt.title("study hours vs burnout label")
+plt.show()
+
+plt.figure()
+plt.scatter(df['sleep_hours'],df['burnout_label'])
+plt.xlabel("sleep hours")
+plt.ylabel("burnout label")
+plt.title("sleep hours vs burnout label")
+plt.show()
